@@ -12,6 +12,6 @@ jobs:
   plan:
   - aggregate:
     - get: create-bosh
-      trigger: true
+      trigger: false
   - task: create
     file: create-bosh/ci/tasks/create-bosh-test.yml
