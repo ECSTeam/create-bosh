@@ -37,7 +37,8 @@ fi
 
 mkdir ~/.ssh/
 echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-git clone git@github.com:cloudfoundry/bosh-deployment.git
+
+yes yes | git clone git@github.com:cloudfoundry/bosh-deployment.git
 
 if [ $command == "vsphere" ]; then
   bosh2 create-env $BD/bosh.yml \
