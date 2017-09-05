@@ -7,7 +7,7 @@ EXPECTED_HELP="USAGE:
 
 Support IaaSes - vsphere, gcp, azure, aws"
 
-ACTUAL_HELP=`./create-bosh.sh help`
+ACTUAL_HELP=`create-bosh/create-bosh.sh help`
 
 # Fail test if help message is not as expected.
 if [[ $ACTUAL_HELP != $EXPECTED_HELP ]]; then
