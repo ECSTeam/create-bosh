@@ -35,7 +35,7 @@ if [ $command == "help" ]; then
   exit 0
 fi
 
-
+git config http.sslVerify “false”
 git clone git@github.com:cloudfoundry/bosh-deployment.git
 
 if [ $command == "vsphere" ]; then
