@@ -8,8 +8,7 @@ image_resource:
     tag: "v0.2"
 
 inputs:
-  - name: create-bosh
-
+  - name: create-bosh-repo
 
 run:
-  path: create-bosh/ci/scripts/create-bosh-test.sh
+  path: create-bosh/ci/tasks/create-bosh-test.sh
