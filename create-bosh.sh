@@ -24,6 +24,7 @@ EOF
 BD=~/workspace/bosh-deployment
 mkdir -p $BD
 
+command=$1
 
 if [ -z $command ] ; then
 	usage
