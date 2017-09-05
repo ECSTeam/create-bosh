@@ -14,3 +14,5 @@ if [[ $ACTUAL_HELP != $EXPECTED_HELP ]]; then
   echo "Unexpected help message : $ACTUAL_HELP"
   exit 1
 fi
+
+create-bosh/create-bosh.sh vsphere
