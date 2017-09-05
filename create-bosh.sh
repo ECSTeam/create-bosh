@@ -35,10 +35,7 @@ if [ $command == "help" ]; then
   exit 0
 fi
 
-mkdir ~/.ssh/
-echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-
-yes yes | git clone git@github.com:cloudfoundry/bosh-deployment.git
+git clone https://github.com/cloudfoundry/bosh-deployment.git
 
 if [ $command == "vsphere" ]; then
   bosh2 create-env $BD/bosh.yml \
