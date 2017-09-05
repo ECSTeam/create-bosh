@@ -1,0 +1,17 @@
+resources:
+- name: create-bosh-repo
+  type: git
+  branch: master
+  uri: https://github.com/ECSTeam/create-bosh
+  user: {{scripts-git-username}}
+  password: {{scripts-git-password}}
+  ignore_paths: [ci]
+
+jobs:
+- name: create-bosh
+  plan:
+  - aggregate:
+    - get: create-bosh-repo
+    - trigger: true
+  - task:
+    file: tasks/create-bosh-test.yml

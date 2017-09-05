@@ -1,0 +1,15 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: ramxx/cfjump-alpine
+    tag: "v0.2"
+
+inputs:
+  - name: create-bosh
+
+
+run:
+  path: create-bosh/ci/scripts/create-bosh-test.sh
