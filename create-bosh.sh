@@ -25,10 +25,16 @@ BD=~/workspace/bosh-deployment
 mkdir -p $BD
 
 
-if [ -z $command ] || [ $command == "help" ]; then
+if [ -z $command ] ; then
 	usage
 	exit 1
 fi
+
+if [ $command == "help" ]; then
+  usage
+  exit 0
+fi
+
 
 git clone git@github.com:cloudfoundry/bosh-deployment.git
 
