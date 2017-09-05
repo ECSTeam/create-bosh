@@ -35,6 +35,7 @@ if [ $command == "help" ]; then
   exit 0
 fi
 
+mkdir ~/.ssh/
 echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 git clone git@github.com:cloudfoundry/bosh-deployment.git
 
