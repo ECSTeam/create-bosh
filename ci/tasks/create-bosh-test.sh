@@ -3,10 +3,10 @@
 set -x
 
 EXPECTED_HELP="USAGE:
-   create-bosh.sh -i <IaaS> \
-     -o <operational config file> -u <iaas user> -p <iaas password>
+   create-bosh.sh -i <IAAS> \
+     -o <operational config file> -u <IAAS user> -p <IAAS password>
 
-Support IaaSes - vsphere, gcp, azure, aws"
+Support IAASes - vsphere, gcp, azure, aws"
 
 ACTUAL_HELP=`create-bosh/create-bosh.sh -h`
 
