@@ -133,8 +133,7 @@ cat <<EOF >> bosh-init-state.json
         "7bd4d49c-5d88-4a4e-7f93-277744c4aa2b",
         "08ab3ee8-a0a4-422a-4fa9-c36c24d9e771"
     ],
-    "current_manifest_sha": "ae837c6178c7c725192be0709718709eb7f2ee3fe37053a0fac24d8b92c11ffe9b9ddf10347261f6f8d788369c42952e63b459ec9ed
-7baac6995a2fd731aadd5",
+    "current_manifest_sha": "ae837c6178c7c725192be0709718709eb7f2ee3fe37053a0fac24d8b92c11ffe9b9ddf10347261f6f8d788369c42952e63b459ec9ed7baac6995a2fd731aadd5",
     "disks": [
         {
             "id": "c59518a4-bea7-47ee-6cef-8297d424995a",
