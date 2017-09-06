@@ -126,9 +126,9 @@ create-bosh/create-bosh.sh -i vsphere -o iaas.json -u lab09admin@lab.ecsteam.loc
    -p Ecsl@b99
 
 export BOSH_CLIENT=admin
-export BOSH_CLIENT_SECRET=`bosh2 int create-bosh/creds.yml --path /admin_password`
+export BOSH_CLIENT_SECRET=e0c1wrd7yeuyrl6th5gk
 
-bosh2 -e lab09 l
+bosh2 -e bootstrap l
 
 # create-bosh/cleanup.sh vsphere
 
