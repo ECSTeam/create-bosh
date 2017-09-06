@@ -42,24 +42,24 @@ case $i in
     usage
     exit 0
     ;;
-    -i=*)
+    -i)
     IAAS="${i#*=}"
     shift # past argument=value
     ;;
-    -o=*)
+    -o)
     OPS_CONFIG="${i#*=}"
     shift # past argument=value
     ;;
-    -u=*)
+    -u)
     IAAS_USER="${i#*=}"
     shift # past argument=value
     ;;
-    -p=*)
+    -p)
     IAAS_PW="${i#*=}"
     shift # past argument=value
     ;;
     *)
-    echo "Unknown argument."
+    echo "Unknown argument - $i"
     usage
     exit 1
     ;;
