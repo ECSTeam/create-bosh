@@ -34,35 +34,38 @@ OPS_CONFIG=""
 IAAS_USER=""
 IAAS_PW=""
 
-# Parse command line arguments.
-for i in "$@"
-do
-case $i in
-    -h)
-    usage
-    exit 0
-    ;;
-    -i)
-    IAAS="${i#*=}"
-    shift 2 # past argument=value
-    ;;
-    -o)
-    OPS_CONFIG="${i#*=}"
-    shift 2 # past argument=value
-    ;;
-    -u)
-    IAAS_USER="${i#*=}"
-    shift 2 # past argument=value
-    ;;
-    -p)
-    IAAS_PW="${i#*=}"
-    shift 2 # past argument=value
-    ;;
+# A POSIX variable
+OPTIND=1
+
+while getopts "ho:p:u:" opt; do
+    case "$opt" in
+    h|\?)
+        usage
+        exit 0
+        ;;
+    i)
+        IAAS=$OPTARG
+        ;;
+    o)
+        OPS_CONFIG=$OPTARG
+        ;;
+    u)
+        IAAS_USER=$OPTARG
+        ;;
+    p)
+        IAAS_PW=$OPTARG
+        ;;
     *)
-    echo "Unknown argument - $i"
-    usage
-    exit 1
-    ;;
+        echo "Unknown argument - $opt"
+        usage
+        exit 1
+        ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+
 esac
 done
 
