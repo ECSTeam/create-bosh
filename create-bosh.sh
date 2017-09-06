@@ -65,10 +65,6 @@ done
 
 shift $((OPTIND-1))
 
-
-esac
-done
-
 git clone https://github.com/cloudfoundry/bosh-deployment.git
 
 IAAS=iaas.json
