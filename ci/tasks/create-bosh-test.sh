@@ -127,6 +127,7 @@ EOF
 
 export BOSH_CLIENT=admin
 export BOSH_CLIENT_SECRET=e0c1wrd7yeuyrl6th5gk
+bosh2 -e 172.28.98.50 --ca-cert cert alias-env bootstrap
 
 bosh2 -e bootstrap l
 
