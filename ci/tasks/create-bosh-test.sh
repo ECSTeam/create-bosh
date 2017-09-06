@@ -22,6 +22,6 @@ export BOSH_CLIENT_SECRET=`bosh2 int create-bosh/creds.yml --path /admin_passwor
 
 bosh2 -e lab09 l
 
-create-bosh/cleanup.sh vsphere
+# create-bosh/cleanup.sh vsphere
 
 # verify bosh is deleted with some command
