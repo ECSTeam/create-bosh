@@ -75,14 +75,14 @@ INTERNAL_IP=`cat $IAAS | jq -r '.director_ip.value'`
 NETWORK_NAME=`cat $IAAS | jq -r '.private_subnet_id.value'`
 VCENTER_DC=`cat $IAAS | jq -r '.region.value'`
 VCENTER_DS=`cat $IAAS | jq -r '.datastore.value'`
-VCENTER_IP=`cat $IAAS | jq -r '.IaaS_endpoint.value'`
-INTERNAL_DNS=`cat $IAAS | jq -r '.IaaS_dns.value'`
+VCENTER_IP=`cat $IAAS | jq -r '.iaas_endpoint.value'`
+INTERNAL_DNS=`cat $IAAS | jq -r '.iaas_dns.value'`
 VCENTER_USER=$IAAS_USER
 VCENTER_PASSWORD=$IAAS_PW
-VCENTER_TEMPLATES=`cat $IAAS | jq -r '.IaaS_image_location.value'`
-VCENTER_VMS=`cat $IAAS | jq -r '.IaaS_image.value'`
-VCENTER_DISKS=`cat $IAAS | jq -r '.IaaS_disk.value'`
-VCENTER_CLUSTER=`cat $IAAS | jq -r '.IaaS_cluster.value'`
+VCENTER_TEMPLATES=`cat $IAAS | jq -r '.iaas_image_location.value'`
+VCENTER_VMS=`cat $IAAS | jq -r '.iaas_image.value'`
+VCENTER_DISKS=`cat $IAAS | jq -r '.iaas_disk.value'`
+VCENTER_CLUSTER=`cat $IAAS | jq -r '.iaas_cluster.value'`
 
 
 if [ $IAAS == "vsphere" ]; then
