@@ -48,6 +48,7 @@ while getopts "ho:p:u:i:d" opt; do
         ;;
     d)
         ACTION=delete-env
+        ;;
     i)
         IAAS=$OPTARG
         ;;
