@@ -44,19 +44,19 @@ case $i in
     ;;
     -i)
     IAAS="${i#*=}"
-    shift # past argument=value
+    shift 2 # past argument=value
     ;;
     -o)
     OPS_CONFIG="${i#*=}"
-    shift # past argument=value
+    shift 2 # past argument=value
     ;;
     -u)
     IAAS_USER="${i#*=}"
-    shift # past argument=value
+    shift 2 # past argument=value
     ;;
     -p)
     IAAS_PW="${i#*=}"
-    shift # past argument=value
+    shift 2 # past argument=value
     ;;
     *)
     echo "Unknown argument - $i"
