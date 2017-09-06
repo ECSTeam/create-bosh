@@ -41,7 +41,7 @@ cat <<EOF >> iaas.json
     "private_subnet_cidr": {
         "sensitive": false,
         "type": "string",
-        "value": "172.28.1.0/24"
+        "value": "172.28.98.0/24"
     },
     "private_subnet_id": {
         "sensitive": false,
