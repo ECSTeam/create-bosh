@@ -67,21 +67,21 @@ shift $((OPTIND-1))
 
 git clone https://github.com/cloudfoundry/bosh-deployment.git
 
-DIRECTOR_NAME=`cat $IAAS | jq -r '.director_name.value'`
-INTERNAL_CIDR=`cat $IAAS | jq -r '.private_subnet_cidr.value'`
-INTERNAL_GW=`cat $IAAS | jq -r '.internal_gateway.value'`
-INTERNAL_IP=`cat $IAAS | jq -r '.director_ip.value'`
-NETWORK_NAME=`cat $IAAS | jq -r '.private_subnet_id.value'`
-VCENTER_DC=`cat $IAAS | jq -r '.region.value'`
-VCENTER_DS=`cat $IAAS | jq -r '.datastore.value'`
-VCENTER_IP=`cat $IAAS | jq -r '.iaas_endpoint.value'`
-INTERNAL_DNS=`cat $IAAS | jq -r '.iaas_dns.value'`
+DIRECTOR_NAME=`cat $OPS_CONFIG | jq -r '.director_name.value'`
+INTERNAL_CIDR=`cat $OPS_CONFIG | jq -r '.private_subnet_cidr.value'`
+INTERNAL_GW=`cat $OPS_CONFIG | jq -r '.internal_gateway.value'`
+INTERNAL_IP=`cat $OPS_CONFIG | jq -r '.director_ip.value'`
+NETWORK_NAME=`cat $OPS_CONFIG | jq -r '.private_subnet_id.value'`
+VCENTER_DC=`cat $OPS_CONFIG | jq -r '.region.value'`
+VCENTER_DS=`cat $OPS_CONFIG | jq -r '.datastore.value'`
+VCENTER_IP=`cat $OPS_CONFIG | jq -r '.iaas_endpoint.value'`
+INTERNAL_DNS=`cat $OPS_CONFIG | jq -r '.iaas_dns.value'`
 VCENTER_USER=$IAAS_USER
 VCENTER_PASSWORD=$IAAS_PW
-VCENTER_TEMPLATES=`cat $IAAS | jq -r '.iaas_image_location.value'`
-VCENTER_VMS=`cat $IAAS | jq -r '.iaas_image.value'`
-VCENTER_DISKS=`cat $IAAS | jq -r '.iaas_disk.value'`
-VCENTER_CLUSTER=`cat $IAAS | jq -r '.iaas_cluster.value'`
+VCENTER_TEMPLATES=`cat $OPS_CONFIG | jq -r '.iaas_image_location.value'`
+VCENTER_VMS=`cat $OPS_CONFIG | jq -r '.iaas_image.value'`
+VCENTER_DISKS=`cat $OPS_CONFIG | jq -r '.iaas_disk.value'`
+VCENTER_CLUSTER=`cat $OPS_CONFIG | jq -r '.iaas_cluster.value'`
 
 
 if [ $IAAS == "vsphere" ]; then
