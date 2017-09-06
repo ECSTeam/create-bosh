@@ -37,7 +37,7 @@ IAAS_PW=""
 # A POSIX variable
 OPTIND=1
 
-while getopts "ho:p:u:" opt; do
+while getopts "ho:p:u:i:" opt; do
     case "$opt" in
     h|\?)
         usage
