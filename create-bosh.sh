@@ -71,7 +71,9 @@ done
 
 shift $((OPTIND-1))
 
-git clone https://github.com/cloudfoundry/bosh-deployment.git
+if [ $ACTION == "create-env" ]; then
+  git clone https://github.com/cloudfoundry/bosh-deployment.git
+fi
 
 DIRECTOR_NAME=`cat $OPS_CONFIG | jq -r '.director_name.value'`
 INTERNAL_CIDR=`cat $OPS_CONFIG | jq -r '.private_subnet_cidr.value'`
