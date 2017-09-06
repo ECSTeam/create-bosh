@@ -85,7 +85,7 @@ VCENTER_DISKS=`cat $IAAS | jq -r '.IaaS_disk.value'`
 VCENTER_CLUSTER=`cat $IAAS | jq -r '.IaaS_cluster.value'`
 
 
-if [ $command == "vsphere" ]; then
+if [ $IAAS == "vsphere" ]; then
   bosh2 create-env $BD/bosh.yml \
     --state=bosh-init-state.json \
     --vars-store=./creds.yml \
