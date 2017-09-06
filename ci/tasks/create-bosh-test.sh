@@ -122,14 +122,15 @@ cat <<EOF >> iaas.json
 }
 EOF
 
-create-bosh/create-bosh.sh -i vsphere -o iaas.json -u lab09admin@lab.ecsteam.local \
-   -p Ecsl@b99
+# create-bosh/create-bosh.sh -i vsphere -o iaas.json -u lab09admin@lab.ecsteam.local \
+#    -p Ecsl@b99
 
 export BOSH_CLIENT=admin
 export BOSH_CLIENT_SECRET=e0c1wrd7yeuyrl6th5gk
 
 bosh2 -e bootstrap l
 
-# create-bosh/cleanup.sh vsphere
+create-bosh/create-bosh.sh -d -i vsphere -o iaas.json -u lab09admin@lab.ecsteam.local \
+   -p Ecsl@b99
 
 # verify bosh is deleted with some command
