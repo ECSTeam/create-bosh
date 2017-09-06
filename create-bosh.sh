@@ -67,7 +67,6 @@ shift $((OPTIND-1))
 
 git clone https://github.com/cloudfoundry/bosh-deployment.git
 
-IAAS=iaas.json
 DIRECTOR_NAME=`cat $IAAS | jq -r '.director_name.value'`
 INTERNAL_CIDR=`cat $IAAS | jq -r '.private_subnet_cidr.value'`
 INTERNAL_GW=`cat $IAAS | jq -r '.internal_gateway.value'`
