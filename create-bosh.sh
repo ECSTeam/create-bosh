@@ -91,7 +91,7 @@ VCENTER_CLUSTER=`cat $OPS_CONFIG | jq -r '.iaas_cluster.value'`
 
 
 if [ $IAAS == "vsphere" ]; then
-  bosh2 $action $BD/bosh.yml \
+  bosh2 $ACTION $BD/bosh.yml \
     --state=bosh-init-state.json \
     --vars-store=./creds.yml \
     -o $BD/vsphere/cpi.yml \
