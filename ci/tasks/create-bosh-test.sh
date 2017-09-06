@@ -16,3 +16,12 @@ if [[ $ACTUAL_HELP != $EXPECTED_HELP ]]; then
 fi
 
 create-bosh/create-bosh.sh vsphere
+
+export BOSH_CLIENT=admin
+export BOSH_CLIENT_SECRET=`bosh2 int create-bosh/creds.yml --path /admin_password`
+
+bosh2 -e lab09 l
+
+create-bosh/cleanup.sh vsphere
+
+# verify bosh is deleted with some command
