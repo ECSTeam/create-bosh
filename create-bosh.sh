@@ -84,28 +84,28 @@ VCENTER_DISKS=`cat $OPS_CONFIG | jq -r '.iaas_disk.value'`
 VCENTER_CLUSTER=`cat $OPS_CONFIG | jq -r '.iaas_cluster.value'`
 
 
-if [ $IAAS == "vsphere" ]; then
-  bosh2 create-env $BD/bosh.yml \
-    --state=bosh-init-state.json \
-    --vars-store=./creds.yml \
-    -o $BD/vsphere/cpi.yml \
-    -o $BD/misc/dns.yml \
-    -v director_name=$DIRECTOR_NAME \
-    -v internal_cidr=$INTERNAL_CIDR \
-    -v internal_gw=$INTERNAL_GW \
-    -v internal_ip=$INTERNAL_IP \
-    -v network_name=$NETWORK_NAME \
-    -v vcenter_dc=$VCENTER_DC \
-    -v vcenter_ds=$VCENTER_DS \
-    -v vcenter_ip=$VCENTER_IP \
-    -v internal_dns=$INTERNAL_DNS \
-    -v vcenter_user=$VCENTER_USER \
-    -v vcenter_password=$VCENTER_PASSWORD \
-    -v vcenter_templates=$VCENTER_TEMPLATES \
-    -v vcenter_vms=$VCENTER_VMS \
-    -v vcenter_disks=$VCENTER_DISKS \
-    -v vcenter_cluster=$VCENTER_CLUSTER
-fi
+# if [ $IAAS == "vsphere" ]; then
+#   bosh2 create-env $BD/bosh.yml \
+#     --state=bosh-init-state.json \
+#     --vars-store=./creds.yml \
+#     -o $BD/vsphere/cpi.yml \
+#     -o $BD/misc/dns.yml \
+#     -v director_name=$DIRECTOR_NAME \
+#     -v internal_cidr=$INTERNAL_CIDR \
+#     -v internal_gw=$INTERNAL_GW \
+#     -v internal_ip=$INTERNAL_IP \
+#     -v network_name=$NETWORK_NAME \
+#     -v vcenter_dc=$VCENTER_DC \
+#     -v vcenter_ds=$VCENTER_DS \
+#     -v vcenter_ip=$VCENTER_IP \
+#     -v internal_dns=$INTERNAL_DNS \
+#     -v vcenter_user=$VCENTER_USER \
+#     -v vcenter_password=$VCENTER_PASSWORD \
+#     -v vcenter_templates=$VCENTER_TEMPLATES \
+#     -v vcenter_vms=$VCENTER_VMS \
+#     -v vcenter_disks=$VCENTER_DISKS \
+#     -v vcenter_cluster=$VCENTER_CLUSTER
+# fi
 
 cat <<EOF >> cert
 -----BEGIN CERTIFICATE-----
