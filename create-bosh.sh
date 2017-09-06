@@ -41,6 +41,7 @@ case $i in
     -h=*)
     usage
     exit 0
+    ;;
     -i=*)
     IAAS="${i#*=}"
     shift # past argument=value
