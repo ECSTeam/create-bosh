@@ -39,7 +39,7 @@ for i in "$@"
 do
 echo $i
 case $i in
-    -h=*)
+    -h)
     usage
     exit 0
     ;;
