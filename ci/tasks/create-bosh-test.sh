@@ -388,7 +388,7 @@ EOF
 # create-bosh/create-bosh.sh -i vsphere -o iaas.json -u lab09admin@lab.ecsteam.local \
 #    -p Ecsl@b99
 
-bosh2 -e $INTERNAL_IP --ca-cert <(bosh2 int ./creds.yml --path /director_ssl/ca) alias-env bootstrap
+bosh2 -e 172.28.98.50  --ca-cert <(bosh2 int ./creds.yml --path /director_ssl/ca) alias-env bootstrap
 
 export BOSH_CLIENT=admin
 export BOSH_CLIENT_SECRET=`bosh2 int ./creds.yml --path /admin_password`
