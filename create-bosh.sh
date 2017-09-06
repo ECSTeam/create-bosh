@@ -37,7 +37,6 @@ IAAS_PW=""
 # Parse command line arguments.
 for i in "$@"
 do
-echo $i
 case $i in
     -h)
     usage
