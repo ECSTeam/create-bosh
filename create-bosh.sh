@@ -10,9 +10,10 @@ set -x
 function usage() {
 cat <<EOF
 USAGE:
-   create-bosh.sh <IaaS>
+   create-bosh.sh -i <IAAS> \
+     -o <operational config file> -u <IAAS user> -p <IAAS password>
 
-Support IaaSes - vsphere, gcp, azure, aws
+Support IAASes - vsphere, gcp, azure, aws
 EOF
 }
 
@@ -23,36 +24,65 @@ EOF
 ####################################
 BD=bosh-deployment
 
-command=$1
+# IAAS to create BOSH on.
+IAAS=""
 
-if [ -z $command ] ; then
-	usage
-	exit 1
-fi
+# Operational configuration file
+OPS_CONFIG=""
 
-if [ $command == "help" ]; then
-  usage
-  exit 0
-fi
+# IAAS credentials
+IAAS_USER=""
+IAAS_PW=""
+
+# Parse command line arguments.
+for i in "$@"
+do
+case $i in
+    -h=*)
+    usage
+    exit 0
+    -i=*)
+    IAAS="${i#*=}"
+    shift # past argument=value
+    ;;
+    -o=*)
+    OPS_CONFIG="${i#*=}"
+    shift # past argument=value
+    ;;
+    -u=*)
+    IAAS_USER="${i#*=}"
+    shift # past argument=value
+    ;;
+    -p=*)
+    IAAS_PW="${i#*=}"
+    shift # past argument=value
+    ;;
+    *)
+    echo "Unknown argument."
+    usage
+    exit 1
+    ;;
+esac
+done
 
 git clone https://github.com/cloudfoundry/bosh-deployment.git
 
-IaaS=iaas.json
-DIRECTOR_NAME=`cat $IaaS | jq -r '.director_name.value'`
-INTERNAL_CIDR=`cat $IaaS | jq -r '.private_subnet_cidr.value'`
-INTERNAL_GW=`cat $IaaS | jq -r '.internal_gateway.value'`
-INTERNAL_IP=`cat $IaaS | jq -r '.director_ip.value'`
-NETWORK_NAME=`cat $IaaS | jq -r '.private_subnet_id.value'`
-VCENTER_DC=`cat $IaaS | jq -r '.region.value'`
-VCENTER_DS=`cat $IaaS | jq -r '.datastore.value'`
-VCENTER_IP=`cat $IaaS | jq -r '.iaas_endpoint.value'`
-INTERNAL_DNS=`cat $IaaS | jq -r '.iaas_dns.value'`
-VCENTER_USER="lab09admin@lab.ecsteam.local"
-VCENTER_PASSWORD="Ecsl@b99"
-VCENTER_TEMPLATES=`cat $IaaS | jq -r '.iaas_image_location.value'`
-VCENTER_VMS=`cat $IaaS | jq -r '.iaas_image.value'`
-VCENTER_DISKS=`cat $IaaS | jq -r '.iaas_disk.value'`
-VCENTER_CLUSTER=`cat $IaaS | jq -r '.iaas_cluster.value'`
+IAAS=iaas.json
+DIRECTOR_NAME=`cat $IAAS | jq -r '.director_name.value'`
+INTERNAL_CIDR=`cat $IAAS | jq -r '.private_subnet_cidr.value'`
+INTERNAL_GW=`cat $IAAS | jq -r '.internal_gateway.value'`
+INTERNAL_IP=`cat $IAAS | jq -r '.director_ip.value'`
+NETWORK_NAME=`cat $IAAS | jq -r '.private_subnet_id.value'`
+VCENTER_DC=`cat $IAAS | jq -r '.region.value'`
+VCENTER_DS=`cat $IAAS | jq -r '.datastore.value'`
+VCENTER_IP=`cat $IAAS | jq -r '.IaaS_endpoint.value'`
+INTERNAL_DNS=`cat $IAAS | jq -r '.IaaS_dns.value'`
+VCENTER_USER=$IAAS_USER
+VCENTER_PASSWORD=$IAAS_PW
+VCENTER_TEMPLATES=`cat $IAAS | jq -r '.IaaS_image_location.value'`
+VCENTER_VMS=`cat $IAAS | jq -r '.IaaS_image.value'`
+VCENTER_DISKS=`cat $IAAS | jq -r '.IaaS_disk.value'`
+VCENTER_CLUSTER=`cat $IAAS | jq -r '.IaaS_cluster.value'`
 
 
 if [ $command == "vsphere" ]; then
@@ -78,4 +108,4 @@ if [ $command == "vsphere" ]; then
     -v vcenter_cluster=$VCENTER_CLUSTER
 fi
 
-bosh2 -e 172.28.98.50 --ca-cert <(bosh2 int ./creds.yml --path /director_ssl/ca) alias-env lab09
+bosh2 -e 172.28.98.50 --ca-cert <(bosh2 int ./creds.yml --path /director_ssl/ca) alias-env bootstrap
