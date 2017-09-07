@@ -11,10 +11,10 @@ function usage() {
 cat <<EOF
 USAGE:
    create-bosh.sh -i <IAAS> \
-     -o <operational config file> -u <IAAS user> -p <IAAS password> [-d]
-
--d - delete the current deployment
-
+     -o <operational config file> -u <IAAS user> -p <IAAS password> [-d] \
+\
+-d - delete the current deployment \
+\
 Supported IaaSes - vsphere, gcp, azure, aws
 EOF
 }
