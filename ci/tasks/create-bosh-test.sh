@@ -2,7 +2,7 @@
 
 set -x
 
-EXPECTED_HELP="USAGE:
+EXPECTED_HELP="USAGE: \
    create-bosh.sh -i <IAAS> \
      -o <operational config file> -u <IAAS user> -p <IAAS password> [-d] \
 \
