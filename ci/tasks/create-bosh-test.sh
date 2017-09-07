@@ -1,12 +1,14 @@
 #!/bin/bash -e
 
-set -x
+# set -x
 
 EXPECTED_HELP="USAGE:
    create-bosh.sh -i <IAAS> \
-     -o <operational config file> -u <IAAS user> -p <IAAS password>
+     -o <operational config file> -u <IAAS user> -p <IAAS password> [-d]
 
-Support IAASes - vsphere, gcp, azure, aws"
+   -d - delete the current deployment
+
+   Supported IaaSes - vsphere, gcp, azure, aws"
 
 ACTUAL_HELP=`create-bosh/create-bosh.sh -h`
 
