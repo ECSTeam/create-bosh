@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-# set -x
+set -x
 
 EXPECTED_HELP="USAGE:
    create-bosh.sh -i <IAAS> \
