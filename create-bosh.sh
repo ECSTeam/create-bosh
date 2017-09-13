@@ -76,24 +76,27 @@ if [ $ACTION == "create-env" ]; then
   git clone https://github.com/cloudfoundry/bosh-deployment.git
 fi
 
+# IaaS common properties
+IAAS_USER=$IAAS_USER
+IAAS_PASSWORD=$IAAS_PW
 DIRECTOR_NAME=`cat $OPS_CONFIG | jq -r '.director_name.value'`
 INTERNAL_CIDR=`cat $OPS_CONFIG | jq -r '.private_subnet_cidr.value'`
 INTERNAL_GW=`cat $OPS_CONFIG | jq -r '.internal_gateway.value'`
 INTERNAL_IP=`cat $OPS_CONFIG | jq -r '.director_ip.value'`
 NETWORK_NAME=`cat $OPS_CONFIG | jq -r '.private_subnet_id.value'`
-VCENTER_DC=`cat $OPS_CONFIG | jq -r '.region.value'`
-VCENTER_DS=`cat $OPS_CONFIG | jq -r '.datastore.value'`
-VCENTER_IP=`cat $OPS_CONFIG | jq -r '.iaas_endpoint.value'`
 INTERNAL_DNS=`cat $OPS_CONFIG | jq -r '.iaas_dns.value'`
-VCENTER_USER=$IAAS_USER
-VCENTER_PASSWORD=$IAAS_PW
-VCENTER_TEMPLATES=`cat $OPS_CONFIG | jq -r '.iaas_image_location.value'`
-VCENTER_VMS=`cat $OPS_CONFIG | jq -r '.iaas_image.value'`
-VCENTER_DISKS=`cat $OPS_CONFIG | jq -r '.iaas_disk.value'`
-VCENTER_CLUSTER=`cat $OPS_CONFIG | jq -r '.iaas_cluster.value'`
-
 
 if [ $IAAS == "vsphere" ]; then
+  # vSphere specific properties
+
+  VCENTER_TEMPLATES=`cat $OPS_CONFIG | jq -r '.iaas_image_location.value'`
+  VCENTER_VMS=`cat $OPS_CONFIG | jq -r '.iaas_image.value'`
+  VCENTER_DISKS=`cat $OPS_CONFIG | jq -r '.iaas_disk.value'`
+  VCENTER_CLUSTER=`cat $OPS_CONFIG | jq -r '.iaas_cluster.value'`
+  VCENTER_DC=`cat $OPS_CONFIG | jq -r '.region.value'`
+  VCENTER_DS=`cat $OPS_CONFIG | jq -r '.datastore.value'`
+  VCENTER_IP=`cat $OPS_CONFIG | jq -r '.iaas_endpoint.value'`
+
   bosh2 $ACTION $BD/bosh.yml \
     --state=bosh-init-state.json \
     --vars-store=./creds.yml \
@@ -108,8 +111,8 @@ if [ $IAAS == "vsphere" ]; then
     -v vcenter_ds=$VCENTER_DS \
     -v vcenter_ip=$VCENTER_IP \
     -v internal_dns=$INTERNAL_DNS \
-    -v vcenter_user=$VCENTER_USER \
-    -v vcenter_password=$VCENTER_PASSWORD \
+    -v vcenter_user=$IAAS_USER \
+    -v vcenter_password=$IAAS_PASSWORD \
     -v vcenter_templates=$VCENTER_TEMPLATES \
     -v vcenter_vms=$VCENTER_VMS \
     -v vcenter_disks=$VCENTER_DISKS \
