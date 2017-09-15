@@ -23,21 +23,18 @@ EOF
 #   MAIN
 #
 ####################################
-BD=bosh-deployment
 
+# Directory for the bosh-deployment repo.
+BD=bosh-deployment
 # IAAS to create BOSH on.
 IAAS=""
-
 # Cloud configuration yml file
 CLOUD_CONFIG_YML=""
-
 # Operational configuration file
 OPS_CONFIG=""
-
 # IAAS credentials
 IAAS_USER=""
 IAAS_PW=""
-
 # Default action is to create an environment.
 ACTION=create-env
 
@@ -77,10 +74,6 @@ while getopts "hc:o:p:u:i:d" opt; do
 done
 
 shift $((OPTIND-1))
-
-if [ $ACTION == "create-env" ]; then
-  git clone https://github.com/cloudfoundry/bosh-deployment.git
-fi
 
 # IaaS common properties
 IAAS_USER=$IAAS_USER
@@ -125,6 +118,7 @@ if [ $IAAS == "vsphere" ]; then
     -v vcenter_cluster=$VCENTER_CLUSTER
 fi
 
+# If the environment is being created, create an alias and upload the cloud config.
 if [ $ACTION == "create-env" ]; then
   bosh2 -e $INTERNAL_IP --ca-cert <(bosh2 int ./creds.yml --path /director_ssl/ca) alias-env bootstrap
   bosh2 ucc $CLOUD_CONFIG_YML
