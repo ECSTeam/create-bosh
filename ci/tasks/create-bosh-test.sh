@@ -18,7 +18,7 @@ if [[ "$ACTUAL_HELP" != "$EXPECTED_HELP" ]]; then
 fi
 
 # Create the directory where files specific to this deployment are housed.
-DEPLOYMENT_DIR=test-deployment
+DEPLOYMENT_DIR=`pwd`/test-deployment
 
 mkdir $DEPLOYMENT_DIR
 
