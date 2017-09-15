@@ -10,7 +10,7 @@
 function usage() {
 cat <<EOF
 USAGE:
-   create-bosh.sh -i <IAAS> -o <operational config file> -u <IAAS user> -p <IAAS password> [-d]
+   create-bosh.sh -i <IAAS> -c <cloud config> -o <operational config file> -u <IAAS user> -p <IAAS password> [-d]
 
 -d - delete the current deployment
 
@@ -28,6 +28,9 @@ BD=bosh-deployment
 # IAAS to create BOSH on.
 IAAS=""
 
+# Cloud configuration yml file
+CLOUD_CONFIG_YML=""
+
 # Operational configuration file
 OPS_CONFIG=""
 
@@ -41,11 +44,14 @@ ACTION=create-env
 # A POSIX variable
 OPTIND=1
 
-while getopts "ho:p:u:i:d" opt; do
+while getopts "hc:o:p:u:i:d" opt; do
     case "$opt" in
     h|\?)
         usage
         exit 0
+        ;;
+    c)
+        CLOUD_CONFIG_YML=$OPTARG
         ;;
     d)
         ACTION=delete-env
@@ -121,4 +127,5 @@ fi
 
 if [ $ACTION == "create-env" ]; then
   bosh2 -e $INTERNAL_IP --ca-cert <(bosh2 int ./creds.yml --path /director_ssl/ca) alias-env bootstrap
+  bosh2 ucc $CLOUD_CONFIG_YML
 fi

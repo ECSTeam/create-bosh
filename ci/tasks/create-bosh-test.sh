@@ -3,7 +3,7 @@
 set -x
 
 EXPECTED_HELP='USAGE:
-   create-bosh.sh -i <IAAS> -o <operational config file> -u <IAAS user> -p <IAAS password> [-d]
+   create-bosh.sh -i <IAAS> -c <cloud config> -o <operational config file> -u <IAAS user> -p <IAAS password> [-d]
 
 -d - delete the current deployment
 

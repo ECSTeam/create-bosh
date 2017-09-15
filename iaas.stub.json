@@ -1,24 +1,4 @@
 {
-    "jumpbox_az": {
-        "sensitive": false,
-        "type": "string",
-        "value": "us-east-1a"
-    },
-    "jumpbox_public_ip": {
-        "sensitive": false,
-        "type": "string",
-        "value": "54.89.13.216"
-    },
-    "jumpbox_security_group": {
-        "sensitive": false,
-        "type": "string",
-        "value": "sg-xxx"
-    },
-    "prefix": {
-        "sensitive": false,
-        "type": "string",
-        "value": "mpm"
-    },
     "private_subnet_cidr": {
         "sensitive": false,
         "type": "string",
