@@ -176,6 +176,8 @@ EOF
 
 cd create-bosh
 
+alias bosh=bosh2
+
 ./create-bosh.sh -i vsphere -o $DEPLOYMENT_DIR -u lab09admin@lab.ecsteam.local \
    -p Ecsl@b99
 
