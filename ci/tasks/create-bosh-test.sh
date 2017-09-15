@@ -3,7 +3,7 @@
 set -x
 
 EXPECTED_HELP='USAGE:
-   create-bosh.sh -i <IAAS> -c <cloud config> -o <operational config file> -u <IAAS user> -p <IAAS password> [-d]
+   create-bosh.sh -o <deployment directory> -i <IAAS> -u <IAAS user> -p <IAAS password> [-d]
 
 -d - delete the current deployment
 
@@ -19,26 +19,6 @@ fi
 
 cat <<EOF >> iaas.json
 {
-    "jumpbox_az": {
-        "sensitive": false,
-        "type": "string",
-        "value": "us-east-1a"
-    },
-    "jumpbox_public_ip": {
-        "sensitive": false,
-        "type": "string",
-        "value": "54.89.13.216"
-    },
-    "jumpbox_security_group": {
-        "sensitive": false,
-        "type": "string",
-        "value": "sg-a8d582d8"
-    },
-    "prefix": {
-        "sensitive": false,
-        "type": "string",
-        "value": "mpm"
-    },
     "private_subnet_cidr": {
         "sensitive": false,
         "type": "string",

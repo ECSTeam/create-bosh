@@ -3,14 +3,27 @@
 #
 # Create a BOSH environment based on the given parameters.
 #
+# It is expected a cloud-config.yml and iaas.json exist in the deployment 
+# directory.
+#
+# Arguments:
+#     -o <deployment directory> - The directory where needed
+#         deployment files live and where gerenated files are stored.
+#         The thought is, this directory would be persisted in an
+#         object store or github.
+#     -i <IaaS> - the IaaS BOSH will be deployed to.
+#     -u <IaaS user> - IaaS user with permissions to perform a deployment.
+#     -p <IaaS password> - password for the IaaS user.
+#     -d - flag set to delete the deployment.
+#
 ###############################################################
 
-#set -x
+set -x
 
 function usage() {
 cat <<EOF
 USAGE:
-   create-bosh.sh -i <IAAS> -c <cloud config> -o <operational config file> -u <IAAS user> -p <IAAS password> [-d]
+   create-bosh.sh -o <deployment directory> -i <IAAS> -u <IAAS user> -p <IAAS password> [-d]
 
 -d - delete the current deployment
 
@@ -30,6 +43,8 @@ BD=bosh-deployment
 IAAS=""
 # Cloud configuration yml file
 CLOUD_CONFIG_YML=""
+# Directory where files related to this deployment are stored.
+DEPLOYMENT_DIR=""
 # Operational configuration file
 OPS_CONFIG=""
 # IAAS credentials
@@ -38,9 +53,7 @@ IAAS_PW=""
 # Default action is to create an environment.
 ACTION=create-env
 
-# A POSIX variable
-OPTIND=1
-
+# Parse the command argument list
 while getopts "hc:o:p:u:i:d" opt; do
     case "$opt" in
     h|\?)
@@ -57,7 +70,7 @@ while getopts "hc:o:p:u:i:d" opt; do
         IAAS=$OPTARG
         ;;
     o)
-        OPS_CONFIG=$OPTARG
+        DEPLOYMENT_DIR=$OPTARG
         ;;
     u)
         IAAS_USER=$OPTARG
@@ -73,7 +86,14 @@ while getopts "hc:o:p:u:i:d" opt; do
     esac
 done
 
-shift $((OPTIND-1))
+CLOUD_CONFIG_YML=$DEPLOYMENT_DIR/cloud-config.yml
+OPS_CONFIG=$DEPLOYMENT_DIR/iaas.json
+
+
+# Pull in the bosh-deployment submodule. This needed as a base
+# when executing the bosh deployment
+git submodule init 
+git submodule update
 
 # IaaS common properties
 IAAS_USER=$IAAS_USER
@@ -96,9 +116,9 @@ if [ $IAAS == "vsphere" ]; then
   VCENTER_DS=`cat $OPS_CONFIG | jq -r '.datastore.value'`
   VCENTER_IP=`cat $OPS_CONFIG | jq -r '.iaas_endpoint.value'`
 
-  bosh2 $ACTION $BD/bosh.yml \
-    --state=bosh-init-state.json \
-    --vars-store=./creds.yml \
+  bosh $ACTION $BD/bosh.yml \
+    --state=$DEPLOYMENT_DIR/bosh-init-state.json \
+    --vars-store=$DEPLOYMENT_DIR/creds.yml \
     -o $BD/vsphere/cpi.yml \
     -o $BD/misc/dns.yml \
     -v director_name=$DIRECTOR_NAME \
@@ -120,6 +140,8 @@ fi
 
 # If the environment is being created, create an alias and upload the cloud config.
 if [ $ACTION == "create-env" ]; then
-  bosh2 -e $INTERNAL_IP --ca-cert <(bosh2 int ./creds.yml --path /director_ssl/ca) alias-env bootstrap
-  bosh2 ucc $CLOUD_CONFIG_YML
+  bosh -e $INTERNAL_IP --ca-cert <(bosh int $DEPLOYMENT_DIR/creds.yml --path /director_ssl/ca) alias-env bootstrap
+  export BOSH_CLIENT=admin
+  export BOSH_CLIENT_SECRET=`bosh2 int $DEPLOYMENT_DIR/creds.yml --path /admin_password`
+  bosh -n -e bootstrap ucc $CLOUD_CONFIG_YML
 fi
