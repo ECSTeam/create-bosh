@@ -116,7 +116,7 @@ if [ $IAAS == "vsphere" ]; then
   VCENTER_DS=`cat $OPS_CONFIG | jq -r '.datastore.value'`
   VCENTER_IP=`cat $OPS_CONFIG | jq -r '.iaas_endpoint.value'`
 
-  bosh $ACTION $BD/bosh.yml \
+  bosh2 $ACTION $BD/bosh.yml \
     --state=$DEPLOYMENT_DIR/bosh-init-state.json \
     --vars-store=$DEPLOYMENT_DIR/creds.yml \
     -o $BD/vsphere/cpi.yml \
@@ -140,8 +140,8 @@ fi
 
 # If the environment is being created, create an alias and upload the cloud config.
 if [ $ACTION == "create-env" ]; then
-  bosh -e $INTERNAL_IP --ca-cert <(bosh int $DEPLOYMENT_DIR/creds.yml --path /director_ssl/ca) alias-env bootstrap
+  bosh2 -e $INTERNAL_IP --ca-cert <(bosh2 int $DEPLOYMENT_DIR/creds.yml --path /director_ssl/ca) alias-env bootstrap
   export BOSH_CLIENT=admin
   export BOSH_CLIENT_SECRET=`bosh2 int $DEPLOYMENT_DIR/creds.yml --path /admin_password`
-  bosh -n -e bootstrap ucc $CLOUD_CONFIG_YML
+  bosh2 -n -e bootstrap ucc $CLOUD_CONFIG_YML
 fi
