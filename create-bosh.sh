@@ -87,6 +87,7 @@ while getopts "hc:o:p:u:i:d" opt; do
 done
 
 CLOUD_CONFIG_YML=$DEPLOYMENT_DIR/cloud-config.yml
+cat $CLOUD_CONFIG_YML
 OPS_CONFIG=$DEPLOYMENT_DIR/iaas.json
 
 
@@ -105,7 +106,7 @@ INTERNAL_IP=`cat $OPS_CONFIG | jq -r '.director_ip.value'`
 NETWORK_NAME=`cat $OPS_CONFIG | jq -r '.private_subnet_id.value'`
 INTERNAL_DNS=`cat $OPS_CONFIG | jq -r '.iaas_dns.value'`
 
-if [ $IAAS == "vsphere" ]; then
+if [ $IAAS == "vsphere11" ]; then
   # vSphere specific properties
 
   VCENTER_TEMPLATES=`cat $OPS_CONFIG | jq -r '.iaas_image_location.value'`
