@@ -176,7 +176,7 @@ EOF
 
 cd create-bosh
 
-create-bosh.sh -i vsphere -o $DEPLOYMENT_DIR -u lab09admin@lab.ecsteam.local \
+./create-bosh.sh -i vsphere -o $DEPLOYMENT_DIR -u lab09admin@lab.ecsteam.local \
    -p Ecsl@b99
 
 export BOSH_CLIENT=admin
@@ -184,7 +184,7 @@ export BOSH_CLIENT_SECRET=`bosh2 int ./creds.yml --path /admin_password`
 
 bosh2 -e bootstrap l
 
-create-bosh.sh -d -i vsphere -o iaas.json -u lab09admin@lab.ecsteam.local \
+./create-bosh.sh -d -i vsphere -o iaas.json -u lab09admin@lab.ecsteam.local \
    -p Ecsl@b99
 
 # verify bosh is deleted with some command
