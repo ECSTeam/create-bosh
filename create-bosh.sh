@@ -106,7 +106,7 @@ INTERNAL_IP=`cat $OPS_CONFIG | jq -r '.director_ip.value'`
 NETWORK_NAME=`cat $OPS_CONFIG | jq -r '.private_subnet_id.value'`
 INTERNAL_DNS=`cat $OPS_CONFIG | jq -r '.iaas_dns.value'`
 
-if [ $IAAS == "vsphere11" ]; then
+if [ $IAAS == "vsphere" ]; then
   # vSphere specific properties
 
   VCENTER_TEMPLATES=`cat $OPS_CONFIG | jq -r '.iaas_image_location.value'`
