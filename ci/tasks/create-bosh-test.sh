@@ -186,6 +186,8 @@ bosh2 -e bootstrap l
 ./create-bosh.sh -d -i vsphere -o $DEPLOYMENT_DIR -u lab09admin@lab.ecsteam.local \
    -p Ecsl@b99
 
+# turn off failing on error because the ping is expected to fail.
+set +e
 ping -t1 -c1 172.28.98.50 2>/dev/null 1>/dev/null
 if [ "$?" = 0 ]
 then
