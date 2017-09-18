@@ -109,7 +109,6 @@ cat <<EOF >> $DEPLOYMENT_DIR/iaas.json
 EOF
 
 cat <<EOF >> $DEPLOYMENT_DIR/cloud-config.yml
-{
 azs:
 - cloud_properties:
     datacenters:
@@ -170,8 +169,6 @@ vm_types:
     disk: 120960
     ram: 4096
   name: large-disk
-    
-}
 EOF
 
 cd create-bosh
