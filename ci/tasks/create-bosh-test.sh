@@ -179,7 +179,7 @@ alias bosh=bosh2
    -p Ecsl@b99
 
 export BOSH_CLIENT=admin
-export BOSH_CLIENT_SECRET=`bosh2 int ./creds.yml --path /admin_password`
+export BOSH_CLIENT_SECRET=`bosh2 int $DEPLOYMENT_DIR/creds.yml --path /admin_password`
 
 bosh2 -e bootstrap l
 
