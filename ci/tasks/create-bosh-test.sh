@@ -183,7 +183,14 @@ export BOSH_CLIENT_SECRET=`bosh2 int $DEPLOYMENT_DIR/creds.yml --path /admin_pas
 
 bosh2 -e bootstrap l
 
-./create-bosh.sh -d -i vsphere -o iaas.json -u lab09admin@lab.ecsteam.local \
+./create-bosh.sh -d -i vsphere -o $DEPLOYMENT_DIR -u lab09admin@lab.ecsteam.local \
    -p Ecsl@b99
 
-# verify bosh is deleted with some command
+ping -t1 -c1 172.28.98.50 2>/dev/null 1>/dev/null
+if [ "$?" = 0 ]
+then
+  echo "FAILED: BOSH VM still exists."
+  exit 1
+fi
+
+echo "SUCCESS: BOSH VM deleted."
