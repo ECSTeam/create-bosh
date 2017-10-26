@@ -1,5 +1,11 @@
 #!/bin/bash -e
-
+##############################################################
+#
+#  Test case for the create-bosh.sh script. This script
+#  tests the help message is as expected and if a bosh
+#  instance is created as expected.
+#
+##############################################################
 set -x
 
 EXPECTED_HELP='USAGE:
@@ -27,17 +33,17 @@ cat <<EOF >> $DEPLOYMENT_DIR/iaas.json
     "private_subnet_cidr": {
         "sensitive": false,
         "type": "string",
-        "value": "172.28.98.0/24"
+        "value": "172.28.14.0/24"
     },
     "private_subnet_id": {
         "sensitive": false,
         "type": "string",
-        "value": "Lab09-NetH"
+        "value": "Lab01-NetD"
     },
     "public_subnet_cidr": {
         "sensitive": false,
         "type": "string",
-        "value": "172.28.98.0/24"
+        "value": "172.28.14.0/24"
     },
     "public_subnet_id": {
         "sensitive": false,
@@ -47,7 +53,7 @@ cat <<EOF >> $DEPLOYMENT_DIR/iaas.json
     "region": {
         "sensitive": false,
         "type": "string",
-        "value": "Lab09-Datacenter01"
+        "value": "Lab01-Datacenter01"
     },
     "vpc_id": {
         "sensitive": false,
@@ -63,17 +69,17 @@ cat <<EOF >> $DEPLOYMENT_DIR/iaas.json
     "internal_gateway": {
         "sensitive": false,
         "type": "string",
-        "value": "172.28.98.1"
+        "value": "172.28.14.1"
     },
     "director_ip": {
         "sensitive": false,
         "type": "string",
-        "value": "172.28.98.50"
+        "value": "172.28.14.53"
     },
     "datastore": {
         "sensitive": false,
         "type": "string",
-        "value": "nfs-lab09-vol1"
+        "value": "nfs-Lab01-vol1"
     },
     "iaas_endpoint": {
         "sensitive": false,
@@ -103,7 +109,7 @@ cat <<EOF >> $DEPLOYMENT_DIR/iaas.json
     "iaas_cluster": {
         "sensitive": false,
         "type": "string",
-        "value": "Lab09-Cluster01"
+        "value": "Lab01-Cluster01"
     }
 }
 EOF
@@ -113,17 +119,17 @@ azs:
 - cloud_properties:
     datacenters:
     - clusters:
-      - Lab09-Cluster01: {}
+      - Lab01-Cluster01: {}
   name: z1
 - cloud_properties:
     datacenters:
     - clusters:
-      - Lab09-Cluster01: {}
+      - Lab01-Cluster01: {}
   name: z2
 - cloud_properties:
     datacenters:
     - clusters:
-      - Lab09-Cluster01: {}
+      - Lab01-Cluster01: {}
   name: z3
 compilation:
   az: z1
@@ -144,14 +150,14 @@ networks:
     - z2
     - z3
     cloud_properties:
-      name: Lab09-NetH
+      name: Lab01-NetD
     dns:
     - 172.29.0.5
-    gateway: 172.28.98.1
-    range: 172.28.98.0/24
+    gateway: 172.28.14.1
+    range: 172.28.14.0/24
     reserved:
-    - 172.28.98.1-172.28.98.50
-    static: [172.28.98.51-172.28.98.60]
+    - 172.28.14.1-172.28.14.50
+    static: [172.28.14.51-172.28.14.60]
   type: manual
 vm_types:
 - cloud_properties:
@@ -175,7 +181,7 @@ cd create-bosh
 
 alias bosh=bosh2
 
-./create-bosh.sh -i vsphere -o $DEPLOYMENT_DIR -u lab09admin@lab.ecsteam.local \
+./create-bosh.sh -i vsphere -o $DEPLOYMENT_DIR -u lab01admin@lab.ecsteam.local \
    -p Ecsl@b99
 
 export BOSH_CLIENT=admin
@@ -183,12 +189,12 @@ export BOSH_CLIENT_SECRET=`bosh2 int $DEPLOYMENT_DIR/creds.yml --path /admin_pas
 
 bosh2 -e bootstrap l
 
-./create-bosh.sh -d -i vsphere -o $DEPLOYMENT_DIR -u lab09admin@lab.ecsteam.local \
+./create-bosh.sh -d -i vsphere -o $DEPLOYMENT_DIR -u lab01admin@lab.ecsteam.local \
    -p Ecsl@b99
 
 # turn off failing on error because the ping is expected to fail.
 set +e
-ping -t1 -c1 172.28.98.50 2>/dev/null 1>/dev/null
+ping -t1 -c1 172.28.14.50 2>/dev/null 1>/dev/null
 if [ "$?" = 0 ]
 then
   echo "FAILED: BOSH VM still exists."
