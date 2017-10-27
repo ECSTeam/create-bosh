@@ -79,7 +79,7 @@ cat <<EOF >> $DEPLOYMENT_DIR/iaas.json
     "datastore": {
         "sensitive": false,
         "type": "string",
-        "value": "nfs-Lab01-vol1"
+        "value": "nfs-lab01-vol1"
     },
     "iaas_endpoint": {
         "sensitive": false,
