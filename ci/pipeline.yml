@@ -6,12 +6,16 @@ resources:
     uri: https://github.com/ECSTeam/create-bosh
     user: ((git-srv-user))
     password: ((git-srv-password))
+    ignore_paths:
+    - README.md
+    - .gitignore
+    - ci/pipeline.yml
 
 jobs:
 - name: test-create-bosh
   plan:
   - aggregate:
     - get: create-bosh
-      trigger: false
+      trigger: true
   - task: create
     file: create-bosh/ci/tasks/create-bosh-test.yml

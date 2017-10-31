@@ -9,7 +9,7 @@
 set -x
 
 EXPECTED_HELP='USAGE:
-   create-bosh.sh -o <deployment directory> -i <IAAS> -u <IAAS user> -p <IAAS password> [-d]
+   create-bosh.sh -c <config directory> -o <deployment directory> -i <IAAS> -u <IAAS user> -p <IAAS password> [-d]
 
 -d - delete the current deployment
 
@@ -28,6 +28,7 @@ DEPLOYMENT_DIR=`pwd`/test-deployment
 CONFIG_DIR=`pwd`/test-config
 
 mkdir $DEPLOYMENT_DIR
+mkdir $CONFIG_DIR
 
 cat <<EOF >> $CONFIG_DIR/iaas.json
 {

@@ -25,7 +25,7 @@ set -x
 function usage() {
 cat <<EOF
 USAGE:
-   create-bosh.sh -o <deployment directory> -i <IAAS> -u <IAAS user> -p <IAAS password> [-d]
+   create-bosh.sh -c <config directory> -o <deployment directory> -i <IAAS> -u <IAAS user> -p <IAAS password> [-d]
 
 -d - delete the current deployment
 
