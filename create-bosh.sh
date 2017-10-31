@@ -92,7 +92,7 @@ done
 
 CLOUD_CONFIG_YML=$CONFIG_DIR/cloud-config.yml
 cat $CLOUD_CONFIG_YML
-OPS_CONFIG=$DEPLOYMENT_DIR/iaas.json
+OPS_CONFIG=$CONFIG_DIR/iaas.json
 
 
 # Pull in the bosh-deployment submodule. This needed as a base
