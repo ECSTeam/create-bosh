@@ -7,6 +7,8 @@
 # directory.
 #
 # Arguments:
+#     -c <config directory> - The directory where configuration files
+#        are stored. 
 #     -o <deployment directory> - The directory where needed
 #         deployment files live and where gerenated files are stored.
 #         The thought is, this directory would be persisted in an
@@ -43,6 +45,8 @@ BD=bosh-deployment
 IAAS=""
 # Cloud configuration yml file
 CLOUD_CONFIG_YML=""
+# Directory where configuration files are stored.
+CONFIG_DIR=""
 # Directory where files related to this deployment are stored.
 DEPLOYMENT_DIR=""
 # Operational configuration file
@@ -60,8 +64,8 @@ while getopts "hc:o:p:u:i:d" opt; do
         usage
         exit 0
         ;;
-    c)
-        CLOUD_CONFIG_YML=$OPTARG
+    c) 
+        CONFIG_DIR=$OPTARG
         ;;
     d)
         ACTION=delete-env
@@ -86,7 +90,7 @@ while getopts "hc:o:p:u:i:d" opt; do
     esac
 done
 
-CLOUD_CONFIG_YML=$DEPLOYMENT_DIR/cloud-config.yml
+CLOUD_CONFIG_YML=$CONFIG_DIR/cloud-config.yml
 cat $CLOUD_CONFIG_YML
 OPS_CONFIG=$DEPLOYMENT_DIR/iaas.json
 

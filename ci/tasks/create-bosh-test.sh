@@ -25,10 +25,11 @@ fi
 
 # Create the directory where files specific to this deployment are housed.
 DEPLOYMENT_DIR=`pwd`/test-deployment
+CONFIG_DIR=`pwd`/test-config
 
 mkdir $DEPLOYMENT_DIR
 
-cat <<EOF >> $DEPLOYMENT_DIR/iaas.json
+cat <<EOF >> $CONFIG_DIR/iaas.json
 {
     "private_subnet_cidr": {
         "sensitive": false,
@@ -114,7 +115,7 @@ cat <<EOF >> $DEPLOYMENT_DIR/iaas.json
 }
 EOF
 
-cat <<EOF >> $DEPLOYMENT_DIR/cloud-config.yml
+cat <<EOF >> $CONFIG_DIR/cloud-config.yml
 azs:
 - cloud_properties:
     datacenters:
@@ -181,7 +182,7 @@ cd create-bosh
 
 alias bosh=bosh2
 
-./create-bosh.sh -i vsphere -o $DEPLOYMENT_DIR -u lab01admin@lab.ecsteam.local \
+./create-bosh.sh -i vsphere -c $CONFIG_DIR -o $DEPLOYMENT_DIR -u lab01admin@lab.ecsteam.local \
    -p Ecsl@b99
 
 export BOSH_CLIENT=admin
@@ -189,7 +190,7 @@ export BOSH_CLIENT_SECRET=`bosh2 int $DEPLOYMENT_DIR/creds.yml --path /admin_pas
 
 bosh2 -e bootstrap l
 
-./create-bosh.sh -d -i vsphere -o $DEPLOYMENT_DIR -u lab01admin@lab.ecsteam.local \
+./create-bosh.sh -d -i vsphere -c $CONFIG_DIR -o $DEPLOYMENT_DIR -u lab01admin@lab.ecsteam.local \
    -p Ecsl@b99
 
 # turn off failing on error because the ping is expected to fail.
