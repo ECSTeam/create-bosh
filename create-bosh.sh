@@ -136,6 +136,7 @@ if [ $IAAS == "vsphere" ]; then
     -v vcenter_dc=$VCENTER_DC \
     -v vcenter_ds=$VCENTER_DS \
     -v vcenter_ip=$VCENTER_IP \
+    -v vcenter_vms="test-bosh-name" \
     -v vcenter_rp=$VCENTER_RESOURCE_POOL \
     -v internal_dns=$INTERNAL_DNS \
     -v vcenter_user=$IAAS_USER \
