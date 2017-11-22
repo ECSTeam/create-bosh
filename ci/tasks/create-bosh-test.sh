@@ -88,6 +88,11 @@ cat <<EOF >> $CONFIG_DIR/iaas.json
         "type": "string",
         "value": "172.29.0.11"
     },
+    "iaas_resource_pool": {
+        "sensitive": false,
+        "type": "string",
+        "value": "Gold"
+    },
     "iaas_dns": {
         "sensitive": false,
         "type": "string",

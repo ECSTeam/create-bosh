@@ -120,6 +120,7 @@ if [ $IAAS == "vsphere" ]; then
   VCENTER_DC=`cat $OPS_CONFIG | jq -r '.region.value'`
   VCENTER_DS=`cat $OPS_CONFIG | jq -r '.datastore.value'`
   VCENTER_IP=`cat $OPS_CONFIG | jq -r '.iaas_endpoint.value'`
+  VCENTER_RESOURCE_POOL=`cat $OPS_CONFIG | jq -r '.iaas_resource_pool.value'`
 
   bosh2 $ACTION $BD/bosh.yml \
     --state=$DEPLOYMENT_DIR/bosh-init-state.json \
@@ -134,6 +135,7 @@ if [ $IAAS == "vsphere" ]; then
     -v vcenter_dc=$VCENTER_DC \
     -v vcenter_ds=$VCENTER_DS \
     -v vcenter_ip=$VCENTER_IP \
+    -v vcenter_rp=$VCENTER_RESOURCE_POOL \
     -v internal_dns=$INTERNAL_DNS \
     -v vcenter_user=$IAAS_USER \
     -v vcenter_password=$IAAS_PASSWORD \
