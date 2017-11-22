@@ -127,6 +127,7 @@ if [ $IAAS == "vsphere" ]; then
     --vars-store=$DEPLOYMENT_DIR/creds.yml \
     -o $BD/vsphere/cpi.yml \
     -o $BD/misc/dns.yml \
+    -o $BD/vsphere/resource-pool.yml \
     -v director_name=$DIRECTOR_NAME \
     -v internal_cidr=$INTERNAL_CIDR \
     -v internal_gw=$INTERNAL_GW \
