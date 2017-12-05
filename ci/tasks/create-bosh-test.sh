@@ -196,16 +196,16 @@ export BOSH_CLIENT_SECRET=`bosh2 int $DEPLOYMENT_DIR/creds.yml --path /admin_pas
 
 bosh2 -e bootstrap l
 
-# ./create-bosh.sh -d -i vsphere -c $CONFIG_DIR -o $DEPLOYMENT_DIR -u lab01admin@lab.ecsteam.local \
-#    -p Ecsl@b99
+./create-bosh.sh -d -i vsphere -c $CONFIG_DIR -o $DEPLOYMENT_DIR -u lab01admin@lab.ecsteam.local \
+   -p Ecsl@b99
 
-# # turn off failing on error because the ping is expected to fail.
-# set +e
-# ping -t1 -c1 172.28.14.50 2>/dev/null 1>/dev/null
-# if [ "$?" = 0 ]
-# then
-#   echo "FAILED: BOSH VM still exists."
-#   exit 1
-# fi
+# turn off failing on error because the ping is expected to fail.
+set +e
+ping -t1 -c1 172.28.14.50 2>/dev/null 1>/dev/null
+if [ "$?" = 0 ]
+then
+  echo "FAILED: BOSH VM still exists."
+  exit 1
+fi
 
-# echo "SUCCESS: BOSH VM deleted."
+echo "SUCCESS: BOSH VM deleted."
