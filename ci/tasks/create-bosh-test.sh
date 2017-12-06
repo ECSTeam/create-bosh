@@ -76,7 +76,7 @@ cat <<EOF >> $CONFIG_DIR/iaas.json
     "director_ip": {
         "sensitive": false,
         "type": "string",
-        "value": "172.28.14.53"
+        "value": "172.28.14.60"
     },
     "datastore": {
         "sensitive": false,
@@ -201,7 +201,7 @@ bosh2 -e bootstrap l
 
 # turn off failing on error because the ping is expected to fail.
 set +e
-ping -t1 -c1 172.28.14.50 2>/dev/null 1>/dev/null
+ping -t1 -c1 172.28.14.60 2>/dev/null 1>/dev/null
 if [ "$?" = 0 ]
 then
   echo "FAILED: BOSH VM still exists."

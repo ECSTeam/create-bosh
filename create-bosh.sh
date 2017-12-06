@@ -1,9 +1,9 @@
 #!/bin/bash -e
 ###############################################################
 #
-# Create a BOSH environment based on the given parameters.
+# Creates a BOSH environment based on the given parameters.
 #
-# It is expected a cloud-config.yml and iaas.json exist in the deployment 
+# It is expected a cloud-config.yml and iaas.json exist in the configuration 
 # directory.
 #
 # Arguments:
@@ -91,7 +91,6 @@ while getopts "hc:o:p:u:i:d" opt; do
 done
 
 CLOUD_CONFIG_YML=$CONFIG_DIR/cloud-config.yml
-cat $CLOUD_CONFIG_YML
 OPS_CONFIG=$CONFIG_DIR/iaas.json
 
 
