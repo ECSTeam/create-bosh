@@ -1,0 +1,68 @@
+{
+  "private_subnet_cidr":
+  {
+    "sensitive": false,
+    "type": "string",
+    "value": "10.3.0.0/24"
+  },
+  "internal_gateway":
+  {
+    "sensitive": false,
+    "type": "string",
+    "value": "10.3.0.1"
+  },
+  "director_name":
+  {
+    "sensitive": false,
+    "type": "string",
+    "value": "bosh-aws-bootstrap"
+  },
+  "director_ip":
+  {
+    "sensitive": false,
+    "type": "string",
+    "value": "10.3.0.6"
+  },
+  "director_public_ip":
+  {
+    "sensitive": false,
+    "type": "string",
+    "value": "34.216.191.210"
+  },
+  "region":
+  {
+    "sensitive": false,
+    "type": "string",
+    "value": "us-west-2"
+  },
+  "subnet_id":
+  {
+    "sensitive": false,
+    "type": "string",
+    "value": "subnet-8c7b5bc4"
+  },
+  "az":
+  {
+    "sensitive": false,
+    "type": "string",
+    "value": "us-west-2a"
+  },
+  "default_security_group":
+  {
+    "sensitive": false,
+    "type": "string",
+    "value": "bosh-director-sg,bosh-director-sg-office"
+  },
+  "key_pair_name":
+  {
+    "sensitive": false,
+    "type": "string",
+    "value": "bosh"
+  },
+  "private_key_file":
+  {
+    "sensitive": false,
+    "type": "string",
+    "value": "bosh.pem"
+  }
+}

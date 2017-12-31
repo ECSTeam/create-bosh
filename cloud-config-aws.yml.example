@@ -1,0 +1,64 @@
+azs:
+- name: z1
+  cloud_properties: {availability_zone: us-west-2a}
+
+vm_types:
+- name: default
+  cloud_properties:
+    instance_type: t2.micro
+    ephemeral_disk: {size: 3000, type: gp2}
+- name: concourse
+  cloud_properties:
+    instance_type: m3.large
+    ephemeral_disk: {size: 3000, type: gp2}
+    security_groups: [concourse-vms]
+- name: web
+  cloud_properties:
+    instance_type: t2.micro
+    ephemeral_disk: {size: 3000, type: gp2}
+    security_groups: [concourse-vms,concourse-web]
+- name: worker
+  cloud_properties:
+    instance_type: m3.large
+    ephemeral_disk: {size: 30000, type: gp2}
+    security_groups: [concourse-vms]
+
+disk_types:
+- name: default
+  disk_size: 3000
+  cloud_properties: {type: gp2}
+- name: large
+  disk_size: 50_000
+  cloud_properties: {type: gp2}
+
+networks:
+- name: public
+  type: manual
+  subnets:
+  - range: 10.3.0.0/24
+    gateway: 10.3.0.1
+    az: z1
+    static: [10.3.0.21-10.3.0.50]
+    reserved: [10.3.0.1-10.3.0.20]
+    dns: [10.3.0.2]
+    cloud_properties: {subnet: subnet-d348699b}
+- name: private
+  type: manual
+  subnets:
+  - range: 10.3.1.0/24
+    gateway: 10.3.1.1
+    az: z1
+    static: [10.3.1.21-10.3.1.50]
+    reserved: [10.3.1.1-10.3.1.20]
+    dns: [10.3.0.2]
+    cloud_properties: {subnet: subnet-d7d2f59f}
+- name: vip
+  type: vip
+
+compilation:
+  workers: 5
+  reuse_compilation_vms: true
+  az: z1
+  vm_type: large
+  network: private
+s
