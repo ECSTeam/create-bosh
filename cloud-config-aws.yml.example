@@ -22,6 +22,10 @@ vm_types:
     instance_type: m3.large
     ephemeral_disk: {size: 30000, type: gp2}
     security_groups: [concourse-vms]
+- name: large
+  cloud_properties:
+    instance_type: m3.large
+    ephemeral_disk: {size: 30000, type: gp2}
 
 disk_types:
 - name: default
