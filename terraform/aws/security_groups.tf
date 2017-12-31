@@ -98,3 +98,52 @@ resource "aws_security_group_rule" "directorSG-office" {
 
   security_group_id = "${aws_security_group.directorSG.id}"
 }
+
+
+/* security groups for concourse */
+resource "aws_security_group" "concourse-vms" {
+    name = "concourse-vms"
+    description = "Allow connections between concourse vms"
+    vpc_id = "${aws_vpc.BoshVpc.id}"
+    tags {
+        Name = "${var.environment}-concourse vms sg"
+    }
+    ingress {
+        from_port = 0
+        to_port = 0
+        protocol = -1
+        cidr_blocks = ["${var.public_subnet_cidr_az1}"]
+    }
+    ingress {
+        from_port = 0
+        to_port = 0
+        protocol = -1
+        cidr_blocks = ["${var.concourse_private_subnet_cidr_az1}"]
+    }
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = -1
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+}
+resource "aws_security_group" "concourse-web" {
+    name = "concourse-web"
+    description = "Allow incoming connections to web vm on 443."
+    vpc_id = "${aws_vpc.BoshVpc.id}"
+    tags {
+        Name = "${var.environment}-concourse web"
+    }
+    ingress {
+        from_port = 443
+        to_port = 443
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = -1
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+}
