@@ -19,3 +19,5 @@ jobs:
       trigger: true
   - task: create
     file: create-bosh/ci/tasks/create-bosh-test.yml
+    params:
+      VSPHERE_PASSWORD: ((vsphere-password))

@@ -189,7 +189,7 @@ cd create-bosh
 alias bosh=bosh2
 
 ./create-bosh.sh -i vsphere -c $CONFIG_DIR -o $DEPLOYMENT_DIR -u lab01admin@lab.ecsteam.local \
-   -p Ecsl@b99
+   -p $VSPHERE_PASSWORD
 
 export BOSH_CLIENT=admin
 export BOSH_CLIENT_SECRET=`bosh2 int $DEPLOYMENT_DIR/creds.yml --path /admin_password`
@@ -197,7 +197,7 @@ export BOSH_CLIENT_SECRET=`bosh2 int $DEPLOYMENT_DIR/creds.yml --path /admin_pas
 bosh2 -e bootstrap l
 
 ./create-bosh.sh -d -i vsphere -c $CONFIG_DIR -o $DEPLOYMENT_DIR -u lab01admin@lab.ecsteam.local \
-   -p Ecsl@b99
+   -p $VSPHERE_PASSWORD
 
 # turn off failing on error because the ping is expected to fail.
 set +e
