@@ -6,7 +6,9 @@
 #  instance is created as expected.
 #
 ##############################################################
-set -x
+
+# Exit with a failure if a command fails.
+set -e
 
 EXPECTED_HELP='USAGE:
    create-bosh.sh -c <config directory> -o <deployment directory> -i <IAAS> -u <IAAS user> -p <IAAS password> [-d]

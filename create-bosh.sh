@@ -20,7 +20,8 @@
 #
 ###############################################################
 
-set -x
+# Exit with a failure if a command fails.
+set -e
 
 function usage() {
 cat <<EOF
