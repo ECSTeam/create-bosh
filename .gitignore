@@ -1,3 +1,7 @@
 */credentials.yml
 */iaas.json
 runit.sh
+*creds*
+config
+bosh-init-state.json
+
