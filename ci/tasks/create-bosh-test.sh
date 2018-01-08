@@ -198,6 +198,16 @@ export BOSH_CLIENT_SECRET=`bosh2 int $DEPLOYMENT_DIR/creds.yml --path /admin_pas
 
 bosh2 -e bootstrap l
 
+bosh int $DEPLOYMENT_DIR/creds.yml --path /jumpbox_ssh/private_key > $DEPLOYMENT_DIR/jumpbox.key
+chmod 600 $DEPLOYMENT_DIR/jumpbox.key
+ssh jumpbox@172.28.14.60 -i $DEPLOYMENT_DIR/jumpbox.key<<EOF
+echo "I am in bosh director"
+whoami;
+id;
+env;
+EOF
+
+
 ./create-bosh.sh -d -i vsphere -c $CONFIG_DIR -o $DEPLOYMENT_DIR -u lab01admin@lab.ecsteam.local \
    -p $VSPHERE_PASSWORD
 

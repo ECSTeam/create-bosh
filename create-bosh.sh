@@ -144,7 +144,8 @@ if [ $IAAS == "vsphere" ]; then
     -v vcenter_templates=$VCENTER_TEMPLATES \
     -v vcenter_vms=$VCENTER_VMS \
     -v vcenter_disks=$VCENTER_DISKS \
-    -v vcenter_cluster=$VCENTER_CLUSTER
+    -v vcenter_cluster=$VCENTER_CLUSTER \
+    -o bosh-deployment/jumpbox-user.yml
   elif [ $IAAS == "aws" ]; then
      # aws specific properties
      DEFAULT_KEY_NAME=`cat $OPS_CONFIG | jq -r '.key_pair_name.value'`
